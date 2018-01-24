@@ -28,21 +28,31 @@ class RecetasController extends Controller
     {
         return new Response(
             '<html><body>
-                -OPCIONES DE BUSQUEDA-<br><br>
+                -OPCIONES DE BUSQUEDA- <br><br>
+                recetas/e/[pagina] <br>
+                Ej.: recetas/e/34 <br><br>
+                recetas/q/[comidas]/[pagina] <br>
+                Ej.: recetas/q/omelet/2 <br><br>
+                recetas/i/[ingredientes]/[pagina] <br>
+                Ej.: recetas/i/potato,tomato/15 <br><br>
                 recetas/[ingredientes]/[comidas]/[pagina] <br>
                 Ej.: recetas/potato,tomato/omelet/15
             </body></html>'
         );
 
     }
+
     /**
+    * @Route("/recetas/e/{pags}", name="recetae")
+    * @Route("/recetas/q/{recips}/{pags}", name="recetaq")
+    * @Route("/recetas/i/{ingredients}/{pags}", name="recetai")
     * @Route("/recetas/{ingredients}/{recips}/{pags}", name="receta")
     * @param $ingredients
     * @param $recips
     * @param $pags
     * @return JsonResponse
     */
-    public function buscarAction($ingredients, $recips,$pags)
+    public function buscarAction($ingredients = "", $recips = "", int $pags = 1)
     { 
         $gz = new GuzzClient;
 
