@@ -11,6 +11,7 @@ class RecetasController extends Controller
 {
     /**
     * @Route("/"), name="index"
+    * @return JsonResponse
     */
     public function indexAction()
     {
@@ -52,15 +53,9 @@ class RecetasController extends Controller
     * @param $pags
     * @return JsonResponse
     */
-    public function buscarAction($ingredients = "", $recips = "", int $pags = 1)
+    public function buscarAction($ingredients = "", $recips = "", int $pags =1)
     { 
         $gz = new GuzzClient;
-
-        //ACCESO A RECETAS:
-        //return new JsonResponse( \GuzzleHttp\json_decode(
-        //        $gz->querySRV($ingredients, $recips, $pags),
-        //                      true)['results'][2]['title'] );
-
         return new JsonResponse( \GuzzleHttp\json_decode(
                 $gz->querySRV($ingredients, $recips, $pags), true)['results']
         );
